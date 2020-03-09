@@ -9,10 +9,10 @@
 /public/bundles/
 /var/
 /vendor/
+!/.env-sample
 ###< symfony/framework-bundle ###
 
 ###
 /public/jquery/
-/public/css/main.css
 /public/font-awesome/
 /public/bootstrap-4.0.0-dist/

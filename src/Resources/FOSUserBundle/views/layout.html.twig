@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="dreamshare" />
-    <meta name="author" content="scshasha">
+    <meta name="description" content="" />
+    <meta name="author" content="">
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <title>{% block title %}Login | My App {% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/font-awesome/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap-reboot.css" />
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap-grid.css" />
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,7 +20,7 @@
         <nav>
             <div class="logo-container navbar-brand">
                 <a href="#" id="logo" class="navbar-brand">
-                    <img src="https://127.0.0.1:8000/avator.png" alt="Siv Shasha">
+                    <img src="/img/avator.png" alt="Siv Shasha">
                 </a>
             </div>
 
@@ -34,7 +31,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="">Contact</a></li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('api.v1.event.show') }}">Activities</a></li>
+                    <li><a href="#" id="create-client-request">Create Client</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle')|raw }}</a></li>
                     <li><a href="{{ path('fos_user_profile_edit') }}"><span class="fa fa-user"></span>&nbsp;{{ app.user.username|raw }}</a></li>
                 {% else %}
@@ -45,16 +42,33 @@
         </nav>
     </header>
     <div class="mt-9 clearfix"></div>
+    <section class="mt-9">
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div class="text-center mt-lg-5 alert alert-warning alert-dismissible flash={{ type }}">{{ message }}</div>
+                    <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 {% endfor %}
             {% endfor %}
         {% endif %}
-    <section class="mt-9">
         <div class="container">
             {% block fos_user_content %}{% endblock fos_user_content %}
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <div id="get-access-token" hidden><input type="hidden" _usernm="{{ app.user.username }}" _secret="{{  app.user.password }}"></div>
+                {% endif %}
+                <div class="well">
+                    <p id="access-token"></p>
+                </div>
+            </div>
         </div>
     </section>
 <footer>
@@ -87,7 +101,7 @@
             <h4>Contact us</h4>
             <div><ul>
                     <li><a href="">Tel: (000)&nbsp;000&nbsp;0000</a></li>
-                    <li><a href="">Email: myapplication@email.com</a></li>
+                    <li><a href="">Email: shasha.christopher@gmail.com</a></li>
                 </ul></div>
         </div>
         <div class="clearfix"></div>
@@ -96,14 +110,24 @@
         </div>
     </div>
 </footer>
+    <div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="loader"></div>
+                    <div class="loader-txt">
+                        <p>Requesting...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-<script
-        src="https://127.0.0.1:8000/jquery/jquery.js"></script>
-{#<script type="text/javascript" src="./assets/js/functions.js"></script>#}
+{#<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{#<script scr="/js/jquery-3.4.1.js"></script>#}
 <script>
     jQuery(document).ready(($) => {
         console.log("ready");
@@ -111,6 +135,69 @@
         jQuery('#fos_user_profile_form div').addClass('form-group');
         jQuery('.form-group label').addClass('mb-2');
         jQuery('.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"]').addClass('form-control');
-    })
+        jQuery('.alert').alert();
+
+        jQuery('#create-client-request').on('click', (e) => {
+            e.preventDefault();
+            console.log('clicked..');
+
+            var _post_data = {'grant-type': "password", 'redirect-uri': "https://127.0.0.1:8000"};
+            var post_data = JSON.stringify(_post_data);
+
+            createClient("https://127.0.0.1:8000/create/client", post_data, 'POST');
+
+
+
+        });
+
+
+        function requestAccessToken(url,method, id, secret) {
+            var unam = jQuery('#get-access-token input[type="hidden"]').attr('_usernm');
+            var pswd = jQuery('#get-access-token input[type="hidden"]').attr('_secret');
+            var _post_data = {client_id: id, client_secret: secret, grant_type: 'password', username: unam, password: pswd};
+            var post_data = JSON.stringify(_post_data);
+            console.log(post_data);
+
+            $.ajax({
+                url: url,type: method, data: post_data, contentType: 'application/json',
+                success: (res) => {
+                    console.log(res);
+                    $('#loadMe').modal("hide");
+                    alert("Access token created: Authentication Bearer " + res);
+                },
+                error: (err) => {
+                    console.log(err);
+                    alert("Whoops, failed to create access token. Please try again.");
+                    $('#loadMe').modal("hide");
+                }
+            })
+        }
+        function createClient(url, data, method) {
+            jQuery("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            jQuery('#loadMe .loader-txt p').text("Creating client...");
+
+            // create client
+            jQuery.ajax({
+                url: url,
+                type: method,
+                data: data,
+                contentType: "application/json",
+                success: (res) => {
+                    jQuery('#loadMe .loader-txt p').text("Generating Access Token...");
+                    console.log(JSON.parse(res));
+                    requestAccessToken("https://127.0.0.1:8000/oauth/v2/token", "POST", res.client_id, res.client_secret);
+                },
+                error: (err) => {
+                    console.log(err);
+                    jQuery('#loadMe').modal("hide");
+                    alert('Whoops, failed to create client!');
+                }
+            });
+        }
+    });
 </script>
 </html>

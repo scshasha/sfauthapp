@@ -22,13 +22,14 @@ class SecurityController extends FOSRestController
     }
 
     /**
-     * Create Client.
      * @FOSRest\Post("/create/client")
      *
      * @return Response
      */
     public function AuthenticationAction(Request $request)
     {
+
+//        return $this->render('@FOSUser/Custom/token.html.twig', ['msg'=> 'all good']);
 
         $data = json_decode($request->getContent(), true);
         if (empty($data['redirect-uri']) || empty($data['grant-type'])) {
@@ -44,6 +45,10 @@ class SecurityController extends FOSRestController
         $rows = [
             'client_id' => $client->getPublicId(), 'client_secret' => $client->getSecret()
         ];
+
+//        return $this->render('main/index.html.twig' , ['data' => $data]);
+
+
 
         return new Response(json_encode($rows));
 //        return $this->handleView($this->view($rows));
