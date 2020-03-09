@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap-reboot.css" />
     <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap-grid.css" />
     <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/bootstrap-4.0.0-dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="https://127.0.0.1:8000/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -48,7 +48,7 @@
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div class="mt-lg-5 alert alert-warning alert-dismissible flash={{ type }}">{{ message }}</div>
+                    <div class="text-center mt-lg-5 alert alert-warning alert-dismissible flash={{ type }}">{{ message }}</div>
                 {% endfor %}
             {% endfor %}
         {% endif %}
@@ -106,8 +106,11 @@
 {#<script type="text/javascript" src="./assets/js/functions.js"></script>#}
 <script>
     jQuery(document).ready(($) => {
-        console.log("ready);
-        jQuery('.fos_user_registration_register input[type="submit"]').toggleClass('btn btn-primary');
+        console.log("ready");
+        jQuery('.fos_user_registration_register input[type="submit"]').addClass('btn btn-primary');
+        jQuery('#fos_user_profile_form div').addClass('form-group');
+        jQuery('.form-group label').addClass('mb-2');
+        jQuery('.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"]').addClass('form-control');
     })
 </script>
 </html>

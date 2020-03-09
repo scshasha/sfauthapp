@@ -2,40 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02d384e5-8574-4c62-9d70-a8018b6cb860" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/avator.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/ChangePassword/change_password.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/ChangePassword/change_password_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/edit_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/list.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/list_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/new_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Group/show_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/edit_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/show_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/check_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/confirmed.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/email.txt.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/register.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/register_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/check_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/email.txt.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/request.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/request_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/reset.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Resetting/reset_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Security/login.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Security/login_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/layout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/edit_content.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Profile/edit_content.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Security/login_content.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Security/login_content.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/layout.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +150,9 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\development\events_rest_api_project\public\css" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\development\events_rest_api_project\public" />
       <recent name="C:\xampp\htdocs\development\events_rest_api_project" />
@@ -198,6 +172,7 @@
       <workItem from="1583591566554" duration="7848000" />
       <workItem from="1583614828451" duration="3199000" />
       <workItem from="1583667067715" duration="36748000" />
+      <workItem from="1583744281980" duration="2672000" />
     </task>
     <servers />
   </component>

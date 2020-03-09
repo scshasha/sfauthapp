@@ -1,23 +1,32 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
-    <div class="alert-dismissible alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Whoops, that didn't go as planned!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" class="form w-50 m-auto">
-    <h3 class="form-text text-lg-center">Fill and submit the form bellow to login</h3>
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    {% endif %}
+<form action="{{ path("fos_user_security_check") }}" method="post" class="mt-lg-5 well-sm w-50">
     <div class="form-group">
-        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" autocomplete="username" placeholder="username" required />
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        {% endif %}
     </div>
     <div class="form-group">
-        <input class="form-control" type="password" id="password" name="_password" autocomplete="current-password" placeholder="password" required />
+        <label for="username" class="mb-2">Username</label>
+        <input type="text" id="username" name="_username" class="form-control" aria-describedby="emailHelp" placeholder="Enter username" value="{{ last_username }}" autocomplete="username" required />
+        <small id="emailHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
     </div>
     <div class="form-group">
-        <input type="checkbox" class="checkbox-inline" id="remember_me" name="_remember_me" value="on" />
-        <label for="remember_me" class="col-form-label">{{ 'security.login.remember_me'|trans }}</label>
-        <input class="btn-dark btn btn-outline-dark pull-right" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <label for="password" class="mb-2">Password</label>
+        <input type="password" class="form-control" id="password" name="_password" autocomplete="current-password" placeholder="Password" required>
     </div>
+    <div class="form-check form-group pl-0 mb-4">
+        <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me" value="on" />
+        <label class="form-check-label ml-3 for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    </div>
+    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
