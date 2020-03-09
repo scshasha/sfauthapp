@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -11,9 +10,15 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 
 
+/**
+ * Class SecurityController
+ * @package App\Controller
+ */
 class SecurityController extends FOSRestController
 {
-
+    /**
+     * @var ClientManagerInterface
+     */
     private $client_manager;
 
     public function __construct(ClientManagerInterface $client_manager)
@@ -29,8 +34,6 @@ class SecurityController extends FOSRestController
     public function AuthenticationAction(Request $request)
     {
 
-//        return $this->render('@FOSUser/Custom/token.html.twig', ['msg'=> 'all good']);
-
         $data = json_decode($request->getContent(), true);
         if (empty($data['redirect-uri']) || empty($data['grant-type'])) {
             return $this->handleView($this->view($data));
@@ -45,10 +48,6 @@ class SecurityController extends FOSRestController
         $rows = [
             'client_id' => $client->getPublicId(), 'client_secret' => $client->getSecret()
         ];
-
-//        return $this->render('main/index.html.twig' , ['data' => $data]);
-
-
 
         return new Response(json_encode($rows));
 //        return $this->handleView($this->view($rows));

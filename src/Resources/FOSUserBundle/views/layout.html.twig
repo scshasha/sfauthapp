@@ -28,7 +28,7 @@
                 <i class="fa fa-bars menu" aria-hidden="true"></i>
             </div>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="#" id="homie">Home</a></li>
                 <li><a href="">Contact</a></li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li><a href="#" id="create-client-request">Create Client</a></li>
@@ -63,11 +63,10 @@
         <div class="container">
             <div class="row">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <div id="get-access-token" hidden><input type="hidden" _usernm="{{ app.user.username }}" _secret="{{  app.user.password }}"></div>
+                    <div id="get-access-token" hidden>
+                        <input type="hidden" _usernm="{{ app.user.username }}">
+                    </div>
                 {% endif %}
-                <div class="well">
-                    <p id="access-token"></p>
-                </div>
             </div>
         </div>
     </section>
@@ -137,33 +136,63 @@
         jQuery('.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"]').addClass('form-control');
         jQuery('.alert').alert();
 
+
         jQuery('#create-client-request').on('click', (e) => {
             e.preventDefault();
-            console.log('clicked..');
+            // console.log('clicked..');
 
             var _post_data = {'grant-type': "password", 'redirect-uri': "https://127.0.0.1:8000"};
             var post_data = JSON.stringify(_post_data);
 
+
             createClient("https://127.0.0.1:8000/create/client", post_data, 'POST');
-
-
-
         });
 
+        function requestAccessToken(url,method, data) {
 
-        function requestAccessToken(url,method, id, secret) {
+            /**
+             * @type {string}
+             * @TODO this is not safe find a better way
+             */
+            var user_password = prompt("Enter your password: ", null);
+
+            // console.log(user_password);
+            // console.log(data);
+            /**
+             *
+             * @type {jQuery}
+             */
             var unam = jQuery('#get-access-token input[type="hidden"]').attr('_usernm');
-            var pswd = jQuery('#get-access-token input[type="hidden"]').attr('_secret');
-            var _post_data = {client_id: id, client_secret: secret, grant_type: 'password', username: unam, password: pswd};
+            /**
+             *
+             * @type {string}
+             */
+            var pswd = user_password;
+            /**
+             *
+             * @type {{password: string, grant_type: string, client_secret: *, client_id: *, username: jQuery}}
+             * @private
+             */
+            var _post_data = {
+                client_id: data.client_id,
+                client_secret: data.client_secret,
+                grant_type: 'password',
+                username: unam,
+                password: pswd
+            };
+            /**
+             *
+             * @type {string}
+             */
             var post_data = JSON.stringify(_post_data);
-            console.log(post_data);
+            // console.log(post_data);
 
             $.ajax({
                 url: url,type: method, data: post_data, contentType: 'application/json',
                 success: (res) => {
-                    console.log(res);
+                    // console.log(res);
                     $('#loadMe').modal("hide");
-                    alert("Access token created: Authentication Bearer " + res);
+                    alert("Access token created: \n" + JSON.stringify(res));
                 },
                 error: (err) => {
                     console.log(err);
@@ -174,9 +203,9 @@
         }
         function createClient(url, data, method) {
             jQuery("#loadMe").modal({
-                backdrop: "static", //remove ability to close modal with click
-                keyboard: false, //remove option to close with keyboard
-                show: true //Display loader!
+                backdrop: "static", // remove ability to close modal with click
+                keyboard: false, // remove option to close with keyboard
+                show: true // Display loader!
             });
             jQuery('#loadMe .loader-txt p').text("Creating client...");
 
@@ -187,12 +216,10 @@
                 data: data,
                 contentType: "application/json",
                 success: (res) => {
-                    jQuery('#loadMe .loader-txt p').text("Generating Access Token...");
-                    console.log(JSON.parse(res));
-                    requestAccessToken("https://127.0.0.1:8000/oauth/v2/token", "POST", res.client_id, res.client_secret);
+                    requestAccessToken("https://127.0.0.1:8000/oauth/v2/token", "POST", JSON.parse(res)); // gen access token
                 },
                 error: (err) => {
-                    console.log(err);
+                    // console.log(err);
                     jQuery('#loadMe').modal("hide");
                     alert('Whoops, failed to create client!');
                 }

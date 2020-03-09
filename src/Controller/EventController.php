@@ -38,6 +38,7 @@ class EventController extends FOSRestController
      */
     public function create(Request $request)
     {
+
         $event = new Event();
         
         $form = $this->createForm(EventType::class);
@@ -78,6 +79,12 @@ class EventController extends FOSRestController
      */
     public function edit(Request $request)
     {
+
+        /**
+         * @TODO
+         *
+         * Fix implementation for this function.
+         */
 
         $event = new Event();
 
