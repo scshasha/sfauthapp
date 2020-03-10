@@ -55,6 +55,14 @@
                 {% endfor %}
             {% endfor %}
         {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div class="alert alert-success access-token-success hidden" role="alert">
+                <h4 class="alert-heading">Generated token!</h4>
+                <p>You have successfully generated your api access token. Find the token below.<br /><a id="js-request-test" access-token="" href="#">Make sample request with the new toke</a></p>
+                <hr>
+                <p id="the-token"></p>
+            </div>
+        {% endif %}
         <div class="container">
             {% block fos_user_content %}{% endblock fos_user_content %}
         </div>
@@ -123,12 +131,13 @@
     </div>
 </body>
 {#<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+<script scr="/js/jquery-3.4.1.js"></script>
+<script scr="/jquery/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-{#<script scr="/js/jquery-3.4.1.js"></script>#}
 <script>
-    jQuery(document).ready(($) => {
+    (document).ready(($) => {
         console.log("ready");
         jQuery('.fos_user_registration_register input[type="submit"]').addClass('btn btn-primary');
         jQuery('#fos_user_profile_form div').addClass('form-group');
@@ -139,7 +148,7 @@
 
         jQuery('#create-client-request').on('click', (e) => {
             e.preventDefault();
-            // console.log('clicked..');
+            console.log('clicked..');
 
             var _post_data = {'grant-type': "password", 'redirect-uri': "https://127.0.0.1:8000"};
             var post_data = JSON.stringify(_post_data);
@@ -156,8 +165,6 @@
              */
             var user_password = prompt("Enter your password: ", null);
 
-            // console.log(user_password);
-            // console.log(data);
             /**
              *
              * @type {jQuery}
@@ -170,7 +177,7 @@
             var pswd = user_password;
             /**
              *
-             * @type {{password: string, grant_type: string, client_secret: *, client_id: *, username: jQuery}}
+             * @type {password: string, grant_type: string, client_secret: *, client_id: *, username: jQuery}
              * @private
              */
             var _post_data = {
@@ -180,6 +187,9 @@
                 username: unam,
                 password: pswd
             };
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                console.log("Test ", {{ app.user.username }});
+            {% endif %}
             /**
              *
              * @type {string}
@@ -191,15 +201,20 @@
                 url: url,type: method, data: post_data, contentType: 'application/json',
                 success: (res) => {
                     // console.log(res);
+
                     $('#loadMe').modal("hide");
+
                     alert("Access token created: \n" + JSON.stringify(res));
+                    $('.access-token-success').toggleClass('hidden');
+                    $('.access-token-success p.the-token').innerHTML("Access Token: " + JSON.parse(res).access_token + "<br />Token Type: " + JSON.parse(res).token_type);
+                    $('.access-token-success a').attr('access-token', JSON.parse(res).access_token);
                 },
                 error: (err) => {
                     console.log(err);
                     alert("Whoops, failed to create access token. Please try again.");
                     $('#loadMe').modal("hide");
                 }
-            })
+            });
         }
         function createClient(url, data, method) {
             jQuery("#loadMe").modal({
@@ -225,6 +240,6 @@
                 }
             });
         }
-    });
+    })(jQuery);
 </script>
 </html>
