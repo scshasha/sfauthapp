@@ -1,4 +1,4 @@
-# Symfony OAuth REST API (with Docker)
+# Symfony REST API + OAuth2.0 (with Docker)
 
 ## Previous requirements
 
