@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02d384e5-8574-4c62-9d70-a8018b6cb860" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/events_rest_api_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/events_rest_api_project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Custom/token.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/test.layout.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,12 +178,27 @@
       <workItem from="1583591566554" duration="7848000" />
       <workItem from="1583614828451" duration="3199000" />
       <workItem from="1583667067715" duration="36748000" />
-      <workItem from="1583744281980" duration="20757000" />
+      <workItem from="1583744281980" duration="30168000" />
+      <workItem from="1583839282666" duration="1182000" />
+      <workItem from="1583940553889" duration="2075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -188,6 +208,14 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="460" y="174" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1583687634820" />
+    <state x="417" y="118" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583769543553">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="417" y="118" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1583769543552" />
+    <state x="96" y="96" width="1174" height="546" key="DiffContextDialog" timestamp="1583782353649">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="96" y="96" width="1174" height="546" key="DiffContextDialog/0.0.1366.738@0.0.1366.738" timestamp="1583782353649" />
     <state x="401" y="186" key="NewPhpClassDialog" timestamp="1583596759923">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -196,9 +224,17 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="333" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.738@0.0.1366.738" timestamp="1583594492392" />
-    <state x="380" y="101" width="606" height="536" key="find.popup" timestamp="1583766810011">
+    <state x="165" y="115" width="983" height="705" key="dock-window-1" timestamp="1583782168596">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="380" y="101" width="606" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1583766810011" />
+    <state x="165" y="115" width="983" height="705" key="dock-window-1/0.0.1366.738@0.0.1366.738" timestamp="1583782168596" />
+    <state x="380" y="101" width="736" height="606" key="find.popup" timestamp="1583773934367">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="380" y="101" width="736" height="606" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1583773934367" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1583941592045">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1583941592045" />
   </component>
 </project>

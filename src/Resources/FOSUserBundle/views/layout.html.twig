@@ -9,6 +9,10 @@
     <title>{% block title %}Login | My App {% endblock %}</title>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{#    // TODO: remove offline styles#}
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/font-awesome/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="/bootstrap-4.0.0-dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -55,6 +59,12 @@
                 {% endfor %}
             {% endfor %}
         {% endif %}
+        <div class="alert alert-success access-token-success hidden" role="alert">
+            <h4 class="alert-heading">Generated token!</h4>
+            <p>You have successfully generated your api access token. Find the token below.<br /><a id="js-request-test" access-token="" href="#">Make sample request with the new toke</a></p>
+            <hr>
+            <p id="the-token"></p>
+        </div>
         <div class="container">
             {% block fos_user_content %}{% endblock fos_user_content %}
         </div>
@@ -123,11 +133,16 @@
     </div>
 </body>
 {#<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+<script scr="/js/jquery-3.4.1.js"></script>
+<script scr="/jquery/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-{#<script scr="/js/jquery-3.4.1.js"></script>#}
 <script>
+    // __isLoaded();
+    // __isLoaded() {
+    //     if (typeOf jQuery === 'undefined') { setTimeout(__isLoaded, 500); }
+    // }
     jQuery(document).ready(($) => {
         console.log("ready");
         jQuery('.fos_user_registration_register input[type="submit"]').addClass('btn btn-primary');
@@ -136,17 +151,52 @@
         jQuery('.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"]').addClass('form-control');
         jQuery('.alert').alert();
 
+        jQuery("button.close").on('click', () => {
+           this.hide();
+        });
+
 
         jQuery('#create-client-request').on('click', (e) => {
             e.preventDefault();
-            // console.log('clicked..');
+            console.log('clicked..');
 
             var _post_data = {'grant-type': "password", 'redirect-uri': "https://127.0.0.1:8000"};
             var post_data = JSON.stringify(_post_data);
 
 
-            createClient("https://127.0.0.1:8000/create/client", post_data, 'POST');
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                createClient("https://127.0.0.1:8000/create/client", post_data, 'POST');
+            {% endif %}
+
         });
+
+        jQuery('#homie').on('click', (e) => {
+            e.preventDefault();
+            var token = jQuery('.access-token-success a').attr('access-token'); // the gen. token
+
+            $.ajax({
+                url: "https://127.0.0.1:8000/api/v1/event/events",
+                type: "GET",
+                headers: {"Authorization": "Bearer " + "NTlkNTQwNTkxZDMxYjAyZTY0OTU5ZDJiNjljYWMwOWRiN2JiMGU0ZWUxNjdiZjc2NDZiZTk0ZTJmNzM5ZTUwYg"},
+                contentType: "application/json",
+
+
+                error: (error) => {
+                    console.log(error);
+                    // var err = xhr.status + ": " + xhr.statusText;
+                    // console.log("Error - " + err);
+                },
+                success: (response) => {
+                    // var res = JSON.parse(response);
+                    console.log(JSON.stringify(response));
+                    console.log(response);
+                }
+
+            });
+
+        });
+
+
 
         function requestAccessToken(url,method, data) {
 
@@ -156,30 +206,31 @@
              */
             var user_password = prompt("Enter your password: ", null);
 
-            // console.log(user_password);
-            // console.log(data);
             /**
              *
              * @type {jQuery}
              */
-            var unam = jQuery('#get-access-token input[type="hidden"]').attr('_usernm');
+            var user = "{{ app.user.username }}"; //jQuery('#get-access-token input[type="hidden"]').attr('_usernm');
             /**
              *
              * @type {string}
              */
-            var pswd = user_password;
+            var pass = user_password;
             /**
              *
-             * @type {{password: string, grant_type: string, client_secret: *, client_id: *, username: jQuery}}
+             * @type {password: string, grant_type: string, client_secret: *, client_id: *, username: jQuery}
              * @private
              */
             var _post_data = {
                 client_id: data.client_id,
                 client_secret: data.client_secret,
                 grant_type: 'password',
-                username: unam,
-                password: pswd
+                username: user,
+                password: pass
             };
+
+            console.log(_post_data);
+            
             /**
              *
              * @type {string}
@@ -189,18 +240,29 @@
 
             $.ajax({
                 url: url,type: method, data: post_data, contentType: 'application/json',
-                success: (res) => {
-                    // console.log(res);
+                success: (response) => {
+                    const token = response.access_token;
+                    const type = response.token_type;
+
+                    $('.access-token-success').toggleClass('hidden'); // unhide
+                    $('.access-token-success a').attr('access-token', token);
+                    $('.access-token-success p.the-token').text("Access Token: " + token + "<br />Token Type: " + type);
+
                     $('#loadMe').modal("hide");
-                    alert("Access token created: \n" + JSON.stringify(res));
+
+                    alert("Access Token: \n" + token);
+
                 },
-                error: (err) => {
+                error: (xhr, status, error) => {
+                    var err = xhr.status + ": " + xhr.statusText;
                     console.log(err);
-                    alert("Whoops, failed to create access token. Please try again.");
+                    alert("Whoops, an error occured - " + err);
                     $('#loadMe').modal("hide");
                 }
-            })
+            });
         }
+
+
         function createClient(url, data, method) {
             jQuery("#loadMe").modal({
                 backdrop: "static", // remove ability to close modal with click
@@ -218,10 +280,11 @@
                 success: (res) => {
                     requestAccessToken("https://127.0.0.1:8000/oauth/v2/token", "POST", JSON.parse(res)); // gen access token
                 },
-                error: (err) => {
-                    // console.log(err);
+                error: (xhr, status, error) => {
+                    var err = xhr.status + ": " + xhr.statusText;
+                    console.log("Error - " + err);
                     jQuery('#loadMe').modal("hide");
-                    alert('Whoops, failed to create client!');
+                    alert('Whoops, an error occured - ' + err);
                 }
             });
         }

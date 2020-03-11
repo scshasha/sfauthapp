@@ -27,8 +27,17 @@ class EventController extends FOSRestController
     public function index()
     {
         $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
-        return $this->render('event/index.html.twig', ['events'=>$events]);
-        return $this->handleView($this->view($events));
+
+        $json_response = [];
+
+        foreach ($events as $key => $value) {
+            $json_response[$key]['name'] = $value->getName();
+            $json_response[$key]['description'] = $value->getDescription();
+        }
+
+        return new Response(json_encode($json_response));
+        // return $this->handleView($this->view(json_encode($events)));
+        // return $this->render('event/index.html.twig', ['events'=>$events]);
     }
 
     /**

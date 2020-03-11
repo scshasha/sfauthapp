@@ -680,5 +680,7 @@ form.fos_user_registration_register {
     text-transform: uppercase;
     text-decoration: underline;
 }
-
+.hidden {
+    display: none !important;
+}
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/events_rest_api_project.iml" filepath="$PROJECT_DIR$/.idea/events_rest_api_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sfauthenticationapp/.idea/sfauthenticationapp.iml" filepath="$PROJECT_DIR$/../sfauthenticationapp/.idea/sfauthenticationapp.iml" />
     </modules>
   </component>
 </project>
