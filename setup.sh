@@ -3,7 +3,7 @@
 ##
 
 # SETUP BRANCH AND GET THE LATEST ODE
-git checkout -b install
+#git checkout -b install
 
 echo "GETTING THE LASTEST SETUP CODE"
 git pull origin install
