@@ -15,14 +15,14 @@ services:
     build:
       context: ./.docker/nginx
     volumes:
-      - ./code/public:/var/www/html
-      - ./.docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./.docker/nginx/sites/:/etc/nginx/sites-available
+      - ./code:/var/www
       - ./.docker/nginx/conf.d/:/etc/nginx/conf.d
+      - ./.docker/nginx/sites/:/etc/nginx/sites-available
+      - ./.docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - php-fpm
     ports:
-      - "8001:80"
+      - "80:80"
       - "443:443"
 
   php-fpm:
@@ -31,4 +31,4 @@ services:
     build:
       context: ./.docker/php-fpm
     volumes:
-      - ./code/public:/var/www/html
+      - ./code:/var/www

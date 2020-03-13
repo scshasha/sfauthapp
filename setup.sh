@@ -36,8 +36,7 @@ cp .env-sample .env
 
 # SPIN UP CONTAINERS
 echo "SPINING UP DOCKER CONTAINERS"
-docker-compose build
-docker-compose up -d
+docker-compose up --build -d
 
 echo "TODO:"
 
